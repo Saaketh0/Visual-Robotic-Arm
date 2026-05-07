@@ -1,0 +1,11 @@
+*.onnx
+.omx/
+build/
+install/
+launch/
+log/
+src/
+tests/
+worlds/
+.env
+explanation.md
