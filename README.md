@@ -1,20 +1,13 @@
-# xArm ROS2 Runtime
+Hey there, this is my robotic arm project, that I built partially for my own interest, and partially for my Applied ML class, ECE 629. This project helped me learn ROS2 and Gazebo fundamentals, as well as working on a Jetson board and controlling a robotic arm separetely.
 
-ROS2 workspace for running a camera-tracked LewanSoul/xArm-style robot arm.
+Hope you enjoy, and below is a bunch of helper scripts that I got Codex to generate.
+
 
 The main package is:
 
 ```text
 src/xarm_runtime
 ```
-
-It contains:
-
-- camera/object tracking node
-- ONNX/TensorRT model runtime wrapper
-- servo controller node
-- serial hardware backend
-- simple tests and Jetson helper scripts
 
 ## Model weights are not included
 
@@ -45,13 +38,6 @@ From the workspace root:
 colcon build --packages-select xarm_runtime xarm_1s_description xarm_tuning_tools
 source install/setup.bash
 ```
-
-## Basic test
-
-```bash
-./scripts/test_runtime.sh
-```
-
 ## Basic hardware run
 
 ```bash
@@ -65,19 +51,6 @@ Jetson defaults are in:
 src/xarm_runtime/config/jetson.yaml
 ```
 
-## Local settings
-
-Machine-specific values belong in `.env`, which is ignored by git.
-Use `.env.example` as the template.
-
-Examples:
-
-```bash
-cp .env.example .env
-```
-
-Then edit `.env` for your machine.
-
 ## Jetson helper
 
 To enter the pinned Jetson ROS container on the Jetson:
@@ -85,12 +58,4 @@ To enter the pinned Jetson ROS container on the Jetson:
 ```bash
 ./scripts/run_jetson_container.sh
 ```
-
 Inside the container, build/source the workspace and launch the hardware nodes.
-
-## Notes
-
-- `build/`, `install/`, and `log/` are generated and ignored.
-- Model artifacts such as `.onnx`, `.engine`, `.pt`, and `.mlpackage` are ignored.
-- Runtime captures/videos are ignored.
-- Legacy discarded code is ignored under `trash/` and `extra_scripts/`.
