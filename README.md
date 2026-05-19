@@ -1,3 +1,5 @@
+[Demo Video](https://www.loom.com/share/e1ee984d1a32469cb6eb85cb480af7c0)
+
 Hey there, this is my robotic arm project, that I built partially for my own interest, and partially for my Applied ML class, ECE 629. This project helped me learn ROS2 and Gazebo fundamentals, as well as working on a Jetson board and controlling a robotic arm separetely.
 
 Hope you enjoy, and below is a bunch of helper scripts that I got Codex to generate.
