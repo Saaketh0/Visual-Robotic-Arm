@@ -1,11 +1,51 @@
-*.onnx
+## Local secrets / machine-specific overrides
+.env
+.env.*
+!.env.example
+
+## OMX/session state
 .omx/
+
+## Python
+__pycache__/
+*.pyc
+.DS_Store
+.pytest_cache/
+
+## ROS / colcon build outputs
 build/
 install/
-launch/
 log/
-src/
-tests/
-worlds/
-.env
-explanation.md
+run_logs/
+
+## ROS generated workspace setup shims
+local_setup.*
+_local_setup_util_sh.py
+
+## Model weights / inference artifacts
+*.onnx
+*.onnx.data
+*.mlpackage/
+*.mlmodel
+*.engine
+*.plan
+*.trt
+*.pt
+*.pth
+*.weights
+
+## Runtime captures / recordings
+*.bag
+*.db3
+*.mcap
+*.avi
+*.mp4
+*.mov
+*.mkv
+frames/
+screenshots/
+captures/
+
+## Legacy/discarded workspace material
+trash/
+extra_scripts/

@@ -1,0 +1,17 @@
+# Python runtime dependencies for Jetson Nano images based on
+# `dustynv/ros:humble-desktop-l4t-r32.7.1`.
+#
+# Keep this file limited to packages that are safe to install with pip across the
+# Jetson container workflow and compatible with the Python 3.6 baseline in
+# dustynv/ros:humble-desktop-l4t-r32.7.1.
+python-dotenv>=0.20,<1; python_version < '3.8'
+python-dotenv>=1.0,<2; python_version >= '3.8'
+pyserial>=3.4,<4
+dataclasses>=0.8,<1; python_version < '3.7'
+# ONNX Runtime is installed in Dockerfile.jetson with a pinned Python 3.6/aarch64
+# CPU wheel fallback, or can be overridden with XARM_JETSON_ORT_WHEEL_URL.
+# Do not add generic floating `onnxruntime` / `onnxruntime-gpu` pins here.
+# Prefer JetPack/OpenCV system packages when available. If you are using a generic
+# dev/test environment instead of JetPack's OpenCV, install one of:
+# opencv-python-headless>=4.8,<5
+# opencv-python>=4.8,<5

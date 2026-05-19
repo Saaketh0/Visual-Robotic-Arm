@@ -1,0 +1,60 @@
+FROM dustynv/ros:humble-desktop-l4t-r32.7.1
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV XARM_WS_ROOT=/workspace/xarm_ws
+ENV XARM_IN_DUSTY_CONTAINER=1
+WORKDIR /workspace/xarm_ws
+
+# The pinned L4T R32 Dusty image can carry an expired ROS apt source for
+# Ubuntu Bionic. Temporarily disable that source for Ubuntu package refreshes;
+# ROS itself is already present in the base image under /opt/ros/humble.
+RUN set -eux; \
+    if [ -f /etc/apt/sources.list.d/ros2.list ]; then mv /etc/apt/sources.list.d/ros2.list /tmp/ros2.list.disabled; fi; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      curl \
+      python3-pip \
+      python3-pytest \
+      python3-opencv \
+      python3-serial \
+      python3-dotenv; \
+    rm -rf /var/lib/apt/lists/*; \
+    if [ -f /tmp/ros2.list.disabled ]; then mv /tmp/ros2.list.disabled /etc/apt/sources.list.d/ros2.list; fi
+
+RUN python3 -m pip install --no-cache-dir colcon-common-extensions==0.3.0
+
+COPY requirements-jetson.txt /tmp/requirements-jetson.txt
+RUN python3 -m pip install --no-cache-dir -r /tmp/requirements-jetson.txt
+
+ARG XARM_JETSON_ORT_WHEEL_URL=
+ARG XARM_JETSON_ORT_PIP_SPEC=onnxruntime==1.10.0
+RUN if ! python3 -c "import onnxruntime" >/dev/null 2>&1; then \
+      if [ -n "$XARM_JETSON_ORT_WHEEL_URL" ]; then \
+        curl -fsSL "$XARM_JETSON_ORT_WHEEL_URL" -o /tmp/onnxruntime-jetson.whl; \
+        python3 -m pip install --no-cache-dir /tmp/onnxruntime-jetson.whl; \
+        rm -f /tmp/onnxruntime-jetson.whl; \
+      else \
+        python3 -m pip install --no-cache-dir "$XARM_JETSON_ORT_PIP_SPEC"; \
+      fi; \
+    fi \
+    && python3 -c "import onnxruntime as ort; print('onnxruntime', getattr(ort, '__version__', 'unknown'), ort.get_available_providers())"
+
+COPY src ./src
+COPY scripts ./scripts
+COPY docs ./docs
+COPY README.md ./README.md
+COPY pytest.ini ./pytest.ini
+COPY exp.onnx ./exp.onnx
+COPY best.onnx ./best.onnx
+
+RUN chmod +x scripts/*.sh \
+    && mkdir -p models \
+    && cp exp.onnx models/exp.onnx \
+    && . /opt/ros/humble/install/setup.bash \
+    && colcon build --packages-select xarm_runtime xarm_1s_description xarm_tuning_tools
+
+RUN . /opt/ros/humble/install/setup.bash \
+    && . install/setup.sh \
+    && python3 -c "import numpy, onnxruntime as ort, rclpy, serial; print('numpy', numpy.__version__); print('onnxruntime', getattr(ort, '__version__', 'unknown'), ort.get_available_providers()); print('rclpy ok'); print('serial', getattr(serial, '__version__', 'unknown'))"
+
+CMD ["bash", "-lc", ". /opt/ros/humble/install/setup.bash && . /workspace/xarm_ws/install/setup.bash && exec bash"]

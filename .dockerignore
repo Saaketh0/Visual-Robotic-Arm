@@ -1,0 +1,16 @@
+.git
+.omx
+build
+install
+log
+run_logs
+__pycache__
+*.pyc
+.DS_Store
+trash
+gazebo
+*.mlpackage
+*.onnx
+!exp.onnx
+!best.onnx
+!models/*.onnx

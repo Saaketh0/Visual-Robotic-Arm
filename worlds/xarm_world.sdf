@@ -1,0 +1,432 @@
+<sdf version='1.12'>
+  <world name='empty'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='xarm_mesh'>
+      <link name='xarm_base_link'>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_base_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/base.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_base_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/base.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0 0 1 1</diffuse>
+            <ambient>0 0 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='xarm_6_joint' type='revolute'>
+        <pose>0 0 0 0 0 0</pose>
+        <parent>xarm_base_link</parent>
+        <child>xarm_6_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.7372383220000001</lower>
+            <upper>1.7996540700000001</upper>
+            <effort>1000</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='xarm_6_link'>
+        <pose>8.2718061255302767e-24 5.4633625097902372e-20 0.036030000000000013 1.0542927277870038e-18 7.0807937960801178e-22 4.3338841617134965e-07</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_6_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link6.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_6_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link6.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+            <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='xarm_5_joint' type='revolute'>
+        <pose>0 0 0 0 0 0</pose>
+        <parent>xarm_6_link</parent>
+        <child>xarm_5_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.592023304</lower>
+            <upper>1.86797401</upper>
+            <effort>1000</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='xarm_5_link'>
+        <pose>9.5345451557700501e-10 -0.0021999999999997941 0.06798000000000004 -0.95882732335632259 -8.2380657378635299e-21 4.3338841617134891e-07</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_5_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link5.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_5_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link5.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0 0 1 1</diffuse>
+            <ambient>0 0 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='xarm_4_joint' type='revolute'>
+        <pose>0 0 0 0 0 0</pose>
+        <parent>xarm_5_link</parent>
+        <child>xarm_4_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.910427965</lower>
+            <upper>1.910427965</upper>
+            <effort>1000</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='xarm_4_link'>
+        <pose>-3.3686556447136987e-08 0.077728326808381987 0.12407799527265931 -0.25711655320570276 -3.3989462026530506e-21 4.3338841617134943e-07</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_4_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link4.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_4_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link4.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+            <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='xarm_3_joint' type='revolute'>
+        <pose>0 0 0 0 0 0</pose>
+        <parent>xarm_4_link</parent>
+        <child>xarm_3_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1.7406121459999999</lower>
+            <upper>1.86797401</upper>
+            <effort>1000</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='xarm_3_link'>
+        <pose>-4.4514455124251376e-08 0.10271260943589017 0.21909824638571782 0.47673444119840291 3.3878509236700428e-21 4.3338841617134986e-07</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_3_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link3.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_3_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link3.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0 0 1 1</diffuse>
+            <ambient>0 0 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='xarm_2_joint' type='revolute'>
+        <pose>0 0 0 0 0 0</pose>
+        <parent>xarm_3_link</parent>
+        <child>xarm_2_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-2.1749487599999999</lower>
+            <upper>1.6312115700000001</upper>
+            <effort>1000</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='xarm_2_link'>
+        <pose>-3.3498231741274217e-08 0.077293786569566189 0.26568900801385947 0.47673444119767738 8.6556469545154507e-07 -1.2425450048127348e-06</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.029999999999999999</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.029999999999999999</iyy>
+            <iyz>0</iyz>
+            <izz>0.029999999999999999</izz>
+          </inertia>
+        </inertial>
+        <collision name='xarm_2_link_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link2.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='xarm_2_link_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>../src/xarm_1s_description/meshes/stls/link2.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+            <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-4.2849469025542076e-09 2.4800689888653406e-06 -2.4336150472096681e-06 -0.022522819607243439 -9.1102809952774097e-06 -4.1683449359830315e-07</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.0099999997764825821</linear>
+        <constant>0.89999997615814209</constant>
+        <quadratic>0.0010000000474974513</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

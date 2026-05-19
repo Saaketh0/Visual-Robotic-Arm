@@ -1,0 +1,15 @@
+/**:
+  ros__parameters:
+    platform_profile: jetson_nano
+    camera_device_candidates:
+      - /dev/video0
+      - /dev/video1
+    camera_width: 640
+    camera_height: 480
+    camera_fps: 50
+    model_path_real: models/exp.onnx
+    enable_imshow: false
+    enable_udp_preview: false
+    serial_port: /dev/ttyTHS1
+    baudrate: 9600
+    move_time_ms: 40

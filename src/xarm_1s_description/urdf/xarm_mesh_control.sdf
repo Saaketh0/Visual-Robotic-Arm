@@ -1,0 +1,364 @@
+<sdf version='1.12'>
+  <model name='xarm'>
+    <link name='xarm_base_link'>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_base_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0 0 1 1</diffuse>
+          <ambient>0 0 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='base_fixed_to_world' type='fixed'>
+      <parent>world</parent>
+      <child>xarm_base_link</child>
+    </joint>
+    <joint name='xarm_6_joint' type='revolute'>
+      <pose relative_to='xarm_base_link'>0 0 0.03603 0 0 0</pose>
+      <parent>xarm_base_link</parent>
+      <child>xarm_6_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.7372383220000001</lower>
+          <upper>1.7996540700000001</upper>
+          <effort>1000</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='xarm_6_link'>
+      <pose relative_to='xarm_6_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_6_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link6.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_6_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+          <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='xarm_5_joint' type='revolute'>
+      <pose relative_to='xarm_6_link'>0 -0.0022000000000000001 0.031949999999999999 0 0 0</pose>
+      <parent>xarm_6_link</parent>
+      <child>xarm_5_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.592023304</lower>
+          <upper>1.86797401</upper>
+          <effort>1000</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='xarm_5_link'>
+      <pose relative_to='xarm_5_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_5_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link5.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_5_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0 0 1 1</diffuse>
+          <ambient>0 0 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='xarm_4_joint' type='revolute'>
+      <pose relative_to='xarm_5_link'>0 0 0.097650000000000001 0 0 0</pose>
+      <parent>xarm_5_link</parent>
+      <child>xarm_4_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.910427965</lower>
+          <upper>1.910427965</upper>
+          <effort>1000</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='xarm_4_link'>
+      <pose relative_to='xarm_4_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_4_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link4.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_4_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+          <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='xarm_3_joint' type='revolute'>
+      <pose relative_to='xarm_4_link'>0 0 0.098250000000000004 0 0 0</pose>
+      <parent>xarm_4_link</parent>
+      <child>xarm_3_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1.7406121459999999</lower>
+          <upper>1.86797401</upper>
+          <effort>1000</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='xarm_3_link'>
+      <pose relative_to='xarm_3_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_3_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link3.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_3_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0 0 1 1</diffuse>
+          <ambient>0 0 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='xarm_2_joint' type='revolute'>
+      <pose relative_to='xarm_3_link'>0 -0.0012049999999999999 0.053060000000000003 0 0 0</pose>
+      <parent>xarm_3_link</parent>
+      <child>xarm_2_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.1749487599999999</lower>
+          <upper>1.6312115700000001</upper>
+          <effort>1000</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='xarm_2_link'>
+      <pose relative_to='xarm_2_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.029999999999999999</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.029999999999999999</iyy>
+          <iyz>0</iyz>
+          <izz>0.029999999999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='xarm_2_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link2.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='xarm_2_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>../meshes/stls/link2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.37500003 0.37500003 0.37500003 1</diffuse>
+          <ambient>0.37500003 0.37500003 0.37500003 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>xarm_6_joint</joint_name>
+      <topic>/xarm/xarm_6_joint/cmd_pos</topic>
+      <p_gain>5.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <cmd_max>1000</cmd_max>
+      <cmd_min>-1000</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>xarm_5_joint</joint_name>
+      <topic>/xarm/xarm_5_joint/cmd_pos</topic>
+      <p_gain>5.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <cmd_max>1000</cmd_max>
+      <cmd_min>-1000</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>xarm_4_joint</joint_name>
+      <topic>/xarm/xarm_4_joint/cmd_pos</topic>
+      <p_gain>5.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <cmd_max>1000</cmd_max>
+      <cmd_min>-1000</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>xarm_3_joint</joint_name>
+      <topic>/xarm/xarm_3_joint/cmd_pos</topic>
+      <p_gain>5.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <cmd_max>1000</cmd_max>
+      <cmd_min>-1000</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>xarm_2_joint</joint_name>
+      <topic>/xarm/xarm_2_joint/cmd_pos</topic>
+      <p_gain>5.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <cmd_max>1000</cmd_max>
+      <cmd_min>-1000</cmd_min>
+    </plugin>
+  </model>
+</sdf>
